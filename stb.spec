@@ -20,7 +20,7 @@ Name:           stb
 #   https://github.com/nothings/stb/issues/359
 #   https://github.com/nothings/stb/issues/1101
 Version:        0
-Release:        0.1.20210728git%{shortcommit}
+Release:        0.1.20210728git%{shortcommit}%{?dist}
 Summary:        Single-file public domain libraries for C/C++
 
 # See LICENSE.
