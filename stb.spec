@@ -21,7 +21,7 @@ Name:           stb
 #   https://github.com/nothings/stb/issues/1101
 Version:        0
 %forgemeta
-Release:        0.1.20210728git%{shortcommit}%{?dist}
+Release:        0.2%{?dist}
 Summary:        Single-file public domain libraries for C/C++
 
 # See LICENSE.
@@ -728,5 +728,8 @@ EOF
 
 
 %changelog
+* Mon Aug 23 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.2
+- Fix duplicated snapshot information
+
 * Mon Aug 23 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.1.20210728git3a11740
 - Initial package for EPEL8
