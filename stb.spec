@@ -1,5 +1,6 @@
 %global forgeurl https://github.com/nothings/%{name}
 %global commit 3a1174060a7dd4eb652d4e6854bc4cd98c159200
+%global shortcommit %(echo '%{commit}' | cut -b -7)
 
 # We choose not to package the “stb_include” library (stb_include.h) because it
 # is so rife with old-school blithe C behavior—wanton use of strcat/strcpy into
@@ -20,7 +21,7 @@ Name:           stb
 #   https://github.com/nothings/stb/issues/1101
 Version:        0
 %forgemeta
-Release:        %autorelease -p
+Release:        0.1.20210728git%{shortcommit}
 Summary:        Single-file public domain libraries for C/C++
 
 # See LICENSE.
@@ -727,4 +728,5 @@ EOF
 
 
 %changelog
-%autochangelog
+* Mon Aug 23 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.1.20210728git3a11740
+- Initial package for EPEL8
