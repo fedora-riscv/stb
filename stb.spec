@@ -20,7 +20,6 @@ Name:           stb
 #   https://github.com/nothings/stb/issues/359
 #   https://github.com/nothings/stb/issues/1101
 Version:        0
-%forgemeta
 Release:        0.1.20210728git%{shortcommit}
 Summary:        Single-file public domain libraries for C/C++
 
@@ -33,7 +32,7 @@ License:        MIT or Unlicense
 #   tests/caveview/win32/SDL_windows_main.c are Public Domain
 # - tests/caveview/glext.h is MIT (only)
 URL:            %{forgeurl}
-Source0:        %{forgesource}
+Source0:        %{forgeurl}/archive/%{commit}/%{name}-%{commit}.tar.gz
 
 # Fix undefined behavior from array “shape-punning”
 # https://github.com/nothings/stb/pull/1194
@@ -505,7 +504,7 @@ Documentation for %{name}.
 
 
 %prep
-%forgeautosetup -p1
+%autosetup -p1 -n %{name}-%{commit}
 
 # Append to OS build flags rather than overriding them
 #
@@ -541,6 +540,7 @@ sed -r -i '/#include[[:blank:]]+"stb_include.h"/d' tests/test_c_compilation.c
 # There is no compiled code to install, since all stb libraries are
 # header-only. We do need to build the tests.
 %set_build_flags
+CXXFLAGS="${CXXFLAGS} -std=c++0x"
 %make_build -C tests
 
 
@@ -549,7 +549,8 @@ sed -r -i '/#include[[:blank:]]+"stb_include.h"/d' tests/test_c_compilation.c
 # unprecedented. Any .c file in stb is meant to be #include’d and used as a
 # header-only library, just as the “.h” files in the other stb libraries. The
 # only difference is the file extension.
-install -t '%{buildroot}%{_includedir}' -p -m 0644 -D stb_*.h stb_*.c
+install -d '%{buildroot}%{_includedir}'
+install -t '%{buildroot}%{_includedir}' -p -m 0644 stb_*.h stb_*.c
 %if %{without stb_include}
 rm -vf '%{buildroot}%{_includedir}/stb_include.h'
 %endif
