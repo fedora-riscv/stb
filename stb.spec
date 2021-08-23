@@ -36,15 +36,15 @@ Source0:        %{forgesource}
 
 # Fix undefined behavior from array “shape-punning”
 # https://github.com/nothings/stb/pull/1194
-Patch0:         %{forgeurl}//pull/1194.patch
+Patch0:         %{forgeurl}/pull/1194.patch
 
 # Fix misleading indentation in stb_divide.h
 # https://github.com/nothings/stb/pull/1195
-Patch1:         %{forgeurl}//pull/1195.patch
+Patch1:         %{forgeurl}/pull/1195.patch
 
 # Trivial fix for array-in-structure initialization (missing braces warning)
 # https://github.com/nothings/stb/pull/1196
-Patch2:         %{forgeurl}//pull/1196.patch
+Patch2:         %{forgeurl}/pull/1196.patch
 
 %global stb_c_lexer_version 0.12
 %global stb_connected_components_version 0.96
@@ -548,10 +548,21 @@ sed -r -i '/#include[[:blank:]]+"stb_include.h"/d' tests/test_c_compilation.c
 # unprecedented. Any .c file in stb is meant to be #include’d and used as a
 # header-only library, just as the “.h” files in the other stb libraries. The
 # only difference is the file extension.
-install -t '%{buildroot}%{_includedir}' -p -m 0644 -D stb_*.h stb_*.c
+#
+# Since these are designed to be copied into dependent package source trees,
+# there is no convention on include paths. Most projects end up using “#include
+# <stb_foo.h>” or “#include <stb/stb_foo.h>”, so we install to
+# %%{_includedir}/stb/stb_foo.h and %%{_includedir}/stb_foo.h, with the latter
+# as a symbolic link to the former. This means most projects can unbundle the
+# library without having to make their own local symlinks or patch their
+# sources.
+install -t '%{buildroot}%{_includedir}/%{name}' -p -m 0644 -D stb_*.h stb_*.c
 %if %{without stb_include}
-rm -vf '%{buildroot}%{_includedir}/stb_include.h'
+rm -vf '%{buildroot}%{_includedir}/stb/stb_include.h'
 %endif
+pushd '%{buildroot}%{_includedir}'
+ln -sv stb/stb_*.? .
+popd
 
 
 %check
@@ -621,108 +632,171 @@ EOF
 
 %files -n stb_c_lexer-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_c_lexer.h
 %{_includedir}/stb_c_lexer.h
 
 
 %files -n stb_connected_components-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_connected_components.h
 %{_includedir}/stb_connected_components.h
 
 
 %files -n stb_divide-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_divide.h
 %{_includedir}/stb_divide.h
 
 
 %files -n stb_ds-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_ds.h
 %{_includedir}/stb_ds.h
 
 
 %files -n stb_dxt-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_dxt.h
 %{_includedir}/stb_dxt.h
 
 
 %files -n stb_easy_font-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_easy_font.h
 %{_includedir}/stb_easy_font.h
 
 
 %files -n stb_herringbone_wang_tile-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_herringbone_wang_tile.h
 %{_includedir}/stb_herringbone_wang_tile.h
 
 
 %files -n stb_hexwave-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_hexwave.h
 %{_includedir}/stb_hexwave.h
 
 
 %files -n stb_image-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_image.h
 %{_includedir}/stb_image.h
 
 
 %files -n stb_image_resize-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_image_resize.h
 %{_includedir}/stb_image_resize.h
 
 
 %files -n stb_image_write-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_image_write.h
 %{_includedir}/stb_image_write.h
 
 
 %if %{with stb_include}
 %files -n stb_include-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_include.h
 %{_includedir}/stb_include.h
 %endif
 
 
 %files -n stb_leakcheck-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_leakcheck.h
 %{_includedir}/stb_leakcheck.h
 
 
 %files -n stb_perlin-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_perlin.h
 %{_includedir}/stb_perlin.h
 
 
 %files -n stb_rect_pack-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_rect_pack.h
 %{_includedir}/stb_rect_pack.h
 
 
 %files -n stb_sprintf-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_sprintf.h
 %{_includedir}/stb_sprintf.h
 
 
 %files -n stb_textedit-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_textedit.h
 %{_includedir}/stb_textedit.h
 
 
 %files -n stb_tilemap_editor-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_tilemap_editor.h
 %{_includedir}/stb_tilemap_editor.h
 
 
 %files -n stb_truetype-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_truetype.h
 %{_includedir}/stb_truetype.h
 
 
 %files -n stb_vorbis-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_vorbis.c
 %{_includedir}/stb_vorbis.c
 
 
 %files -n stb_voxel_render-devel
 %license LICENSE
+# Directory has shared ownership across stb subpackages:
+%dir %{_includedir}/stb
+%{_includedir}/stb/stb_voxel_render.h
 %{_includedir}/stb_voxel_render.h
 
 
