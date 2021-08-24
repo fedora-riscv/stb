@@ -21,7 +21,7 @@ Name:           stb
 #   https://github.com/nothings/stb/issues/1101
 Version:        0
 %forgemeta
-Release:        0.3%{?dist}
+Release:        0.4%{?dist}
 Summary:        Single-file public domain libraries for C/C++
 
 # See LICENSE.
@@ -46,6 +46,10 @@ Patch1:         %{forgeurl}/pull/1195.patch
 # Trivial fix for array-in-structure initialization (missing braces warning)
 # https://github.com/nothings/stb/pull/1196
 Patch2:         %{forgeurl}/pull/1196.patch
+
+# Fix signature of dummy realloc() for STB_VORBIS_NO_CRT
+# https://github.com/nothings/stb/pull/1198
+Patch3:         %{forgeurl}/pull/1198.patch
 
 %global stb_c_lexer_version 0.12
 %global stb_connected_components_version 0.96
@@ -802,6 +806,9 @@ EOF
 
 
 %changelog
+* Tue Aug 24 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.4
+- Fix signature of dummy realloc() for STB_VORBIS_NO_CRT
+
 * Mon Aug 23 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.3
 - Use symlinks so including "stb_foo.h" and "stb/stb_foo.h" both work
 
