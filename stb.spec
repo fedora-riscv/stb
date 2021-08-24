@@ -46,6 +46,10 @@ Patch1:         %{forgeurl}/pull/1195.patch
 # https://github.com/nothings/stb/pull/1196
 Patch2:         %{forgeurl}/pull/1196.patch
 
+# Fix signature of dummy realloc() for STB_VORBIS_NO_CRT
+# https://github.com/nothings/stb/pull/1198
+Patch3:         %{forgeurl}/pull/1198.patch
+
 %global stb_c_lexer_version 0.12
 %global stb_connected_components_version 0.96
 %global stb_divide_version 0.94
