@@ -1,5 +1,5 @@
 %global forgeurl https://github.com/nothings/%{name}
-%global commit 3a1174060a7dd4eb652d4e6854bc4cd98c159200
+%global commit c0c982601f40183e74d84a61237e968dca08380e
 %global shortcommit %(echo '%{commit}' | cut -b -7)
 
 # We choose not to package the “stb_include” library (stb_include.h) because it
@@ -21,7 +21,7 @@ Name:           stb
 #   https://github.com/nothings/stb/issues/1101
 Version:        0
 %forgemeta
-Release:        0.4%{?dist}
+Release:        0.5%{?dist}
 Summary:        Single-file public domain libraries for C/C++
 
 # See LICENSE.
@@ -51,6 +51,10 @@ Patch2:         %{forgeurl}/pull/1196.patch
 # https://github.com/nothings/stb/pull/1198
 Patch3:         %{forgeurl}/pull/1198.patch
 
+# Remove stb_perlin from tests
+# https://github.com/nothings/stb/pull/1198
+Patch4:         %{forgeurl}/pull/1204.patch
+
 %global stb_c_lexer_version 0.12
 %global stb_connected_components_version 0.96
 %global stb_divide_version 0.94
@@ -64,12 +68,11 @@ Patch3:         %{forgeurl}/pull/1198.patch
 %global stb_image_write_version 1.16
 %global stb_include_version 0.2
 %global stb_leakcheck_version 0.6
-%global stb_perlin_version 0.5
 %global stb_rect_pack_version 1.1
 %global stb_sprintf_version 1.10
 %global stb_textedit_version 1.14
 %global stb_tilemap_editor_version 0.42
-%global stb_truetype_version 1.25
+%global stb_truetype_version 1.26
 %global stb_vorbis_version 1.22
 %global stb_voxel_render_version 0.89
 
@@ -121,8 +124,6 @@ Requires:       stb_include-static = %{stb_include_version}-%{release}
 %endif
 Requires:       stb_leakcheck-devel%{?_isa} = %{stb_leakcheck_version}-%{release}
 Requires:       stb_leakcheck-static = %{stb_leakcheck_version}-%{release}
-Requires:       stb_perlin-devel%{?_isa} = %{stb_perlin_version}-%{release}
-Requires:       stb_perlin-static = %{stb_perlin_version}-%{release}
 Requires:       stb_rect_pack-devel%{?_isa} = %{stb_rect_pack_version}-%{release}
 Requires:       stb_rect_pack-static = %{stb_rect_pack_version}-%{release}
 Requires:       stb_sprintf-devel%{?_isa} = %{stb_sprintf_version}-%{release}
@@ -137,6 +138,12 @@ Requires:       stb_vorbis-devel%{?_isa} = %{stb_vorbis_version}-%{release}
 Requires:       stb_vorbis-static = %{stb_vorbis_version}-%{release}
 Requires:       stb_voxel_render-devel%{?_isa} = %{stb_voxel_render_version}-%{release}
 Requires:       stb_voxel_render-static = %{stb_voxel_render_version}-%{release}
+
+# Upstream removed the stb_perlin library in commit
+# 59e7dec3e8bb0a8d4050d03c2dc32cf71ffa87c6, asserting it was covered by
+# patents.
+Obsoletes:       stb_perlin-devel < 0.5-0.5
+Obsoletes:       stb_perlin-static < 0.5-0.5
 
 %description devel
 The %{name}-devel package contains libraries and header files for developing
@@ -335,16 +342,6 @@ Provides:       stb_leakcheck-static = %{stb_leakcheck_version}-%{release}
 
 %description -n stb_leakcheck-devel
 Quick and dirty malloc leak-checking.
-
-
-%package -n stb_perlin-devel
-Summary:        Perlin noise
-Version:        %{stb_perlin_version}
-
-Provides:       stb_perlin-static = %{stb_perlin_version}-%{release}
-
-%description -n stb_perlin-devel
-Perlin noise.
 
 
 %package -n stb_rect_pack-devel
@@ -613,7 +610,6 @@ done <<'EOF'
 %{stb_image_write_version} stb_image_write.h
 %{stb_include_version} stb_include.h
 %{stb_leakcheck_version} stb_leakcheck.h
-%{stb_perlin_version} stb_perlin.h
 %{stb_rect_pack_version} stb_rect_pack.h
 %{stb_sprintf_version} stb_sprintf.h
 %{stb_textedit_version} stb_textedit.h
@@ -741,14 +737,6 @@ EOF
 %{_includedir}/stb_leakcheck.h
 
 
-%files -n stb_perlin-devel
-%license LICENSE
-# Directory has shared ownership across stb subpackages:
-%dir %{_includedir}/stb
-%{_includedir}/stb/stb_perlin.h
-%{_includedir}/stb_perlin.h
-
-
 %files -n stb_rect_pack-devel
 %license LICENSE
 # Directory has shared ownership across stb subpackages:
@@ -806,6 +794,12 @@ EOF
 
 
 %changelog
+* Thu Sep 09 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.5
+- Update to c0c9826 (fix RHBZ#2002436)
+- Removed and obsoleted stb_perlin-devel due to possible patents
+- Updated stb_truetype to 1.26
+- Bug fixes in stb_image (no new version number)
+
 * Tue Aug 24 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.4
 - Fix signature of dummy realloc() for STB_VORBIS_NO_CRT
 
