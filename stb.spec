@@ -1,5 +1,5 @@
 %global forgeurl https://github.com/nothings/stb
-%global commit c0c982601f40183e74d84a61237e968dca08380e
+%global commit af1a5bc352164740c1cc1354942b1c6b72eacb8a
 %global shortcommit %(echo '%{commit}' | cut -b -7)
 
 # We choose not to package the “stb_include” library (stb_include.h) because it
@@ -21,7 +21,7 @@ Name:           stb
 #   https://github.com/nothings/stb/issues/1101
 Version:        0
 %forgemeta
-Release:        0.5%{?dist}
+Release:        0.6%{?dist}
 Summary:        Single-file public domain libraries for C/C++
 
 # See LICENSE.
@@ -794,6 +794,10 @@ EOF
 
 
 %changelog
+* Fri Oct 22 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.6
+- Update to af1a5bc: only issue templates are affected; packaged files should
+  be identical.
+
 * Thu Sep 09 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.5
 - Update to c0c9826 (fix RHBZ#2002436)
 - Removed and obsoleted stb_perlin-devel due to possible patents
