@@ -54,6 +54,32 @@ Patch3:         %{forgeurl}/pull/1198.patch
 # https://github.com/nothings/stb/pull/1198
 Patch4:         %{forgeurl}/pull/1204.patch
 
+# Candidate fix for:
+# https://nvd.nist.gov/vuln/detail/CVE-2021-42715
+#
+# In stb_image's HDR reader, loading a specially constructed invalid HDR file
+# can result in an infinite loop within the RLE decoder
+# https://github.com/nothings/stb/issues/1224
+#
+# ----
+#
+# Additionally, this is a candidate fix for:
+# https://nvd.nist.gov/vuln/detail/CVE-2021-42716
+#
+# stbi__pnm_load heap-buffer-overflow bug
+# https://github.com/nothings/stb/issues/1166
+#
+# In stb_image's PNM reader, loading a specially constructed valid 16-bit PGM
+# file with 4 channels can cause a crash due to an out-of-bounds read
+# https://github.com/nothings/stb/issues/1225
+#
+# ----
+#
+# Fixes a crash and an infinite loop in stb_image that could occur with
+# specially constructed PGM and HDR files
+# https://github.com/nothings/stb/pull/1223
+Patch5:         %{forgeurl}/pull/1223.patch
+
 %global stb_c_lexer_version 0.12
 %global stb_connected_components_version 0.96
 %global stb_divide_version 0.94
