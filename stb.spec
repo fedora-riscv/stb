@@ -1,5 +1,5 @@
 %global forgeurl https://github.com/nothings/stb
-%global commit c0c982601f40183e74d84a61237e968dca08380e
+%global commit af1a5bc352164740c1cc1354942b1c6b72eacb8a
 
 # We choose not to package the “stb_include” library (stb_include.h) because it
 # is so rife with old-school blithe C behavior—wanton use of strcat/strcpy into
