@@ -1,4 +1,4 @@
-%global forgeurl https://github.com/nothings/%{name}
+%global forgeurl https://github.com/nothings/stb
 %global commit c0c982601f40183e74d84a61237e968dca08380e
 %global shortcommit %(echo '%{commit}' | cut -b -7)
 
@@ -90,11 +90,11 @@ BuildRequires:  /usr/bin/convert
 
 
 %package devel
-Summary:        Development files for %{name}
+Summary:        Development files for stb
 
 # Dependent packages should prefer to BuildRequire the -static packages for the
 # specific stb libraries they use.
-Provides:       %{name}-static = %{version}-%{release}
+Provides:       stb-static = %{version}-%{release}
 
 Requires:       stb_c_lexer-devel%{?_isa} = %{stb_c_lexer_version}-%{release}
 Requires:       stb_c_lexer-static = %{stb_c_lexer_version}-%{release}
@@ -146,8 +146,8 @@ Obsoletes:       stb_perlin-devel < 0.5-0.5
 Obsoletes:       stb_perlin-static < 0.5-0.5
 
 %description devel
-The %{name}-devel package contains libraries and header files for developing
-applications that use %{name}.
+The stb-devel package contains libraries and header files for developing
+applications that use stb.
 
 This is a metapackage that requires the -devel packages for all stb libraries.
 
@@ -498,11 +498,11 @@ them.
 
 
 %package doc
-Summary:        Documentation for %{name}
+Summary:        Documentation for stb
 BuildArch:      noarch
 
 %description doc
-Documentation for %{name}.
+Documentation for stb.
 
 
 %prep
@@ -558,7 +558,7 @@ sed -r -i '/#include[[:blank:]]+"stb_include.h"/d' tests/test_c_compilation.c
 # as a symbolic link to the former. This means most projects can unbundle the
 # library without having to make their own local symlinks or patch their
 # sources.
-install -t '%{buildroot}%{_includedir}/%{name}' -p -m 0644 -D stb_*.h stb_*.c
+install -t '%{buildroot}%{_includedir}/stb' -p -m 0644 -D stb_*.h stb_*.c
 %if %{without stb_include}
 rm -vf '%{buildroot}%{_includedir}/stb/stb_include.h'
 %endif
