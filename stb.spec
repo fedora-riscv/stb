@@ -21,7 +21,7 @@ Name:           stb
 #   https://github.com/nothings/stb/issues/1101
 Version:        0
 %forgemeta
-Release:        0.6%{?dist}
+Release:        0.7%{?dist}
 Summary:        Single-file public domain libraries for C/C++
 
 # See LICENSE.
@@ -54,6 +54,32 @@ Patch3:         %{forgeurl}/pull/1198.patch
 # Remove stb_perlin from tests
 # https://github.com/nothings/stb/pull/1198
 Patch4:         %{forgeurl}/pull/1204.patch
+
+# Candidate fix for:
+# https://nvd.nist.gov/vuln/detail/CVE-2021-42715
+#
+# In stb_image's HDR reader, loading a specially constructed invalid HDR file
+# can result in an infinite loop within the RLE decoder
+# https://github.com/nothings/stb/issues/1224
+#
+# ----
+#
+# Additionally, this is a candidate fix for:
+# https://nvd.nist.gov/vuln/detail/CVE-2021-42716
+#
+# stbi__pnm_load heap-buffer-overflow bug
+# https://github.com/nothings/stb/issues/1166
+#
+# In stb_image's PNM reader, loading a specially constructed valid 16-bit PGM
+# file with 4 channels can cause a crash due to an out-of-bounds read
+# https://github.com/nothings/stb/issues/1225
+#
+# ----
+#
+# Fixes a crash and an infinite loop in stb_image that could occur with
+# specially constructed PGM and HDR files
+# https://github.com/nothings/stb/pull/1223
+Patch5:         %{forgeurl}/pull/1223.patch
 
 %global stb_c_lexer_version 0.12
 %global stb_connected_components_version 0.96
@@ -794,6 +820,9 @@ EOF
 
 
 %changelog
+* Fri Oct 22 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.7
+- Security fix for CVE-2021-42715 and CVE-2021-42716
+
 * Fri Oct 22 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.6
 - Update to af1a5bc: only issue templates are affected; packaged files should
   be identical.
