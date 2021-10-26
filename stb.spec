@@ -81,6 +81,15 @@ Patch4:         %{forgeurl}/pull/1204.patch
 # https://github.com/nothings/stb/pull/1223
 Patch5:         %{forgeurl}/pull/1223.patch
 
+# Forward declare stbhw__process struct to fix warnings
+# https://github.com/nothings/stb/pull/1225
+#
+# We don’t see these warnings in the “compile tests”, but we can reproduce them
+# by manually compiling tests/herringbone_map.c; a real user of the
+# stb_herringbone_wang_tile library would encounter them; and inspection of the
+# patch shows it to be correct.
+Patch6:         %{forgeurl}/pull/1236.patch
+
 %global stb_c_lexer_version 0.12
 %global stb_connected_components_version 0.96
 %global stb_divide_version 0.94
