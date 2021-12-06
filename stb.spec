@@ -13,6 +13,9 @@
 # library and expect it will not be missed.
 %bcond_with stb_include
 
+# ImageMagick is not currently packaged for EPEL9
+%bcond_with imagemagick_test
+
 Name:           stb
 # While the individual header-only libraries are versioned, the overall
 # collection is not, and there are no releases. See:
@@ -114,7 +117,9 @@ BuildRequires:  gcc
 BuildRequires:  gcc-c++
 BuildRequires:  make
 
+%if %{with imagemagick_test}
 BuildRequires:  /usr/bin/convert
+%endif
 
 # No compiled binaries are installed, so this would be empty.
 %global debug_package %{nil}
@@ -612,6 +617,7 @@ popd
 rm -vf output
 mkdir -p output
 ./tests/image_write_test
+%if %{with imagemagick_test}
 # We assume that if ImageMagick can read the output images, then they are valid.
 for img in wr6x5_flip.bmp wr6x5_flip.jpg wr6x5_flip.tga wr6x5_regular.hdr \
     wr6x5_regular.png wr6x5_flip.hdr wr6x5_flip.png wr6x5_regular.bmp \
@@ -619,6 +625,7 @@ for img in wr6x5_flip.bmp wr6x5_flip.jpg wr6x5_flip.tga wr6x5_regular.hdr \
 do
   convert "output/${img}" 'output/dummy.bmp'
 done
+%endif
 
 # As a sanity check, verify that all of the subpackage version numbers appear
 # in the corresponding headers.
