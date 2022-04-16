@@ -36,23 +36,23 @@ Source0:        %{forgesource}
 
 # Fix undefined behavior from array “shape-punning”
 # https://github.com/nothings/stb/pull/1194
-Patch0:         %{forgeurl}/pull/1194.patch
+Patch:          %{forgeurl}/pull/1194.patch
 
 # Fix misleading indentation in stb_divide.h
 # https://github.com/nothings/stb/pull/1195
-Patch1:         %{forgeurl}/pull/1195.patch
+Patch:          %{forgeurl}/pull/1195.patch
 
 # Trivial fix for array-in-structure initialization (missing braces warning)
 # https://github.com/nothings/stb/pull/1196
-Patch2:         %{forgeurl}/pull/1196.patch
+Patch:          %{forgeurl}/pull/1196.patch
 
 # Fix signature of dummy realloc() for STB_VORBIS_NO_CRT
 # https://github.com/nothings/stb/pull/1198
-Patch3:         %{forgeurl}/pull/1198.patch
+Patch:          %{forgeurl}/pull/1198.patch
 
 # Remove stb_perlin from tests
 # https://github.com/nothings/stb/pull/1198
-Patch4:         %{forgeurl}/pull/1204.patch
+Patch:          %{forgeurl}/pull/1204.patch
 
 # Candidate fix for:
 # https://nvd.nist.gov/vuln/detail/CVE-2021-42715
@@ -78,7 +78,7 @@ Patch4:         %{forgeurl}/pull/1204.patch
 # Fixes a crash and an infinite loop in stb_image that could occur with
 # specially constructed PGM and HDR files
 # https://github.com/nothings/stb/pull/1223
-Patch5:         %{forgeurl}/pull/1223.patch
+Patch:          %{forgeurl}/pull/1223.patch
 
 # Forward declare stbhw__process struct to fix warnings
 # https://github.com/nothings/stb/pull/1225
@@ -87,7 +87,7 @@ Patch5:         %{forgeurl}/pull/1223.patch
 # by manually compiling tests/herringbone_map.c; a real user of the
 # stb_herringbone_wang_tile library would encounter them; and inspection of the
 # patch shows it to be correct.
-Patch6:         %{forgeurl}/pull/1236.patch
+Patch:          %{forgeurl}/pull/1236.patch
 
 %global stb_c_lexer_version 0.12
 %global stb_connected_components_version 0.96
