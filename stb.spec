@@ -20,7 +20,7 @@ Name:           stb
 #   https://github.com/nothings/stb/issues/359
 #   https://github.com/nothings/stb/issues/1101
 Version:        0
-Release:        0.7.20211022git%{shortcommit}%{?dist}
+Release:        0.8.20211022git%{shortcommit}%{?dist}
 Summary:        Single-file public domain libraries for C/C++
 
 # See LICENSE.
@@ -88,6 +88,22 @@ Patch5:         %{forgeurl}/pull/1223.patch
 # stb_herringbone_wang_tile library would encounter them; and inspection of the
 # patch shows it to be correct.
 Patch6:         %{forgeurl}/pull/1236.patch
+
+# Candidate fix for:
+# https://nvd.nist.gov/vuln/detail/CVE-2022-28041
+#
+# stb_image.h v2.27 was discovered to contain an integer overflow via the
+# function stbi__jpeg_decode_block_prog_dc. This vulnerability allows attackers
+# to cause a Denial of Service (DoS) via unspecified vectors.
+#
+# UBSAN: integer overflow
+# https://github.com/nothings/stb/issues/1292
+#
+# ----
+#
+# Additional stb_image fixes for bugs from ossfuzz and issues 1289, 1291, 1292, and 1293
+# https://github.com/nothings/stb/pull/1297
+Patch:          %{url}/pull/1297.patch
 
 %global stb_c_lexer_version 0.12
 %global stb_connected_components_version 0.96
@@ -830,6 +846,9 @@ EOF
 
 
 %changelog
+* Wed Apr 20 2022 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.8.20211022gitaf1a5bc
+- Security fix for CVE-2022-28041
+
 * Fri Oct 22 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.7.20211022gitaf1a5bc
 - Security fix for CVE-2021-42715 and CVE-2021-42716
 
