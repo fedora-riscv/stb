@@ -21,7 +21,7 @@ Name:           stb
 #   https://github.com/nothings/stb/issues/1101
 Version:        0
 %forgemeta
-Release:        0.7%{?dist}
+Release:        0.8%{?dist}
 Summary:        Single-file public domain libraries for C/C++
 
 # See LICENSE.
@@ -845,6 +845,9 @@ EOF
 
 
 %changelog
+* Wed Apr 20 2022 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.8
+- Security fix for CVE-2022-28041
+
 * Fri Oct 22 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.7
 - Security fix for CVE-2021-42715 and CVE-2021-42716
 
