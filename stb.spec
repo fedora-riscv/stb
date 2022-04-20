@@ -90,6 +90,22 @@ Patch5:         %{forgeurl}/pull/1223.patch
 # patch shows it to be correct.
 Patch6:         %{forgeurl}/pull/1236.patch
 
+# Candidate fix for:
+# https://nvd.nist.gov/vuln/detail/CVE-2022-28041
+#
+# stb_image.h v2.27 was discovered to contain an integer overflow via the
+# function stbi__jpeg_decode_block_prog_dc. This vulnerability allows attackers
+# to cause a Denial of Service (DoS) via unspecified vectors.
+#
+# UBSAN: integer overflow
+# https://github.com/nothings/stb/issues/1292
+#
+# ----
+#
+# Additional stb_image fixes for bugs from ossfuzz and issues 1289, 1291, 1292, and 1293
+# https://github.com/nothings/stb/pull/1297
+Patch:          %{url}/pull/1297.patch
+
 %global stb_c_lexer_version 0.12
 %global stb_connected_components_version 0.96
 %global stb_divide_version 0.94
