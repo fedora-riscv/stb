@@ -1,14 +1,18 @@
 %global commit af1a5bc352164740c1cc1354942b1c6b72eacb8a
 %global snapdate 20210910
 
-# We choose not to package the “stb_include” library (stb_include.h) because it
-# is so rife with old-school blithe C behavior—wanton use of strcat/strcpy into
-# a fixed-length buffer that is assumed (but not proven) to be large enough for
-# all possible uses, ignoring possible I/O errors (possibly leading to
-# undefined behavior from reading uninitialized memory), and so on. Making it
-# safe to use would mean a substantial rewrite.
+# We choose not to package the “stb_include” library (stb_include.h) because,
+# during the package review, it was observed that it follows coding practices
+# that make it dangerous to use on untrusted inputs, including but not limited
+# to:
 #
-# If a request for this library arises, this decision may be revisited, or the
+# - It uses of strcat/strcpy into a fixed-length buffer that is assumed (but
+#   not proven) to be large enough for all possible uses
+# - It ignores I/O errors (possibly leading to undefined behavior from reading
+#   uninitialized memory), and so on. Making it
+#
+# A substantial rewrite would be required to mitigate these concerns. If a
+# request for this library arises, this decision may be revisited, or the
 # necessary rewrite may be done and offered upstream. For now, we omit the
 # library and expect it will not be missed.
 %bcond_with stb_include
