@@ -28,7 +28,7 @@ Release:        %autorelease -p -s %{snapinfo}
 Summary:        Single-file public domain libraries for C/C++
 
 # See LICENSE.
-License:        MIT or Unlicense
+License:        MIT OR Unlicense
 # Additionally, the following are under different terms, but are not used; to
 # make certain, they are removed in %%prep.
 #
