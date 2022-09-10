@@ -400,9 +400,9 @@ Provides:       stb_leakcheck-static = %{stb_leakcheck_version}-%{release}
 
 %package -n stb_perlin-devel
 Summary:        Perlin’s revised simplex noise w/ different seeds
-Version:        %{stb_perlin_version}%{snapinfo}
+Version:        %{stb_perlin_version}
 
-Provides:       stb_perlin-static = %{stb_perlin_version}%{snapinfo}-%{release}
+Provides:       stb_perlin-static = %{stb_perlin_version}-%{release}
 
 %description -n stb_perlin-devel
 %{summary}.
