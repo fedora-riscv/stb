@@ -1,0 +1,27 @@
+* Wed Apr 20 2022 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.8
+- Security fix for CVE-2022-28041
+
+* Fri Oct 22 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.7
+- Security fix for CVE-2021-42715 and CVE-2021-42716
+
+* Fri Oct 22 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.6
+- Update to af1a5bc: only issue templates are affected; packaged files should
+  be identical.
+
+* Thu Sep 09 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.5
+- Update to c0c9826 (fix RHBZ#2002436)
+- Removed and obsoleted stb_perlin-devel due to possible patents
+- Updated stb_truetype to 1.26
+- Bug fixes in stb_image (no new version number)
+
+* Tue Aug 24 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.4
+- Fix signature of dummy realloc() for STB_VORBIS_NO_CRT
+
+* Mon Aug 23 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.3
+- Use symlinks so including "stb_foo.h" and "stb/stb_foo.h" both work
+
+* Mon Aug 23 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.2
+- Fix duplicated snapshot information
+
+* Mon Aug 23 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.1.20210728git3a11740
+- Initial package for EPEL8

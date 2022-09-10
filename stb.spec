@@ -1,6 +1,5 @@
-%global forgeurl https://github.com/nothings/stb
 %global commit af1a5bc352164740c1cc1354942b1c6b72eacb8a
-%global shortcommit %(echo '%{commit}' | cut -b -7)
+%global snapdate 20210910
 
 # We choose not to package the “stb_include” library (stb_include.h) because it
 # is so rife with old-school blithe C behavior—wanton use of strcat/strcpy into
@@ -19,9 +18,9 @@ Name:           stb
 # collection is not, and there are no releases. See:
 #   https://github.com/nothings/stb/issues/359
 #   https://github.com/nothings/stb/issues/1101
+%global snapinfo %{snapdate}git%(echo '%{commit}' | cut -b -7)
 Version:        0
-%forgemeta
-Release:        0.8%{?dist}
+Release:        %autorelease -p -s %{snapinfo}
 Summary:        Single-file public domain libraries for C/C++
 
 # See LICENSE.
@@ -32,28 +31,28 @@ License:        MIT or Unlicense
 # - deprecated/rrsprintf.h, tests/caveview/stb_gl.h, and
 #   tests/caveview/win32/SDL_windows_main.c are Public Domain
 # - tests/caveview/glext.h is MIT (only)
-URL:            %{forgeurl}
-Source0:        %{forgesource}
+URL:            https://github.com/nothings/stb
+Source0:        %{url}/archive/%{commit}/stb-%{commit}.tar.gz
 
 # Fix undefined behavior from array “shape-punning”
 # https://github.com/nothings/stb/pull/1194
-Patch0:         %{forgeurl}/pull/1194.patch
+Patch0:         %{url}/pull/1194.patch
 
 # Fix misleading indentation in stb_divide.h
 # https://github.com/nothings/stb/pull/1195
-Patch1:         %{forgeurl}/pull/1195.patch
+Patch1:         %{url}/pull/1195.patch
 
 # Trivial fix for array-in-structure initialization (missing braces warning)
 # https://github.com/nothings/stb/pull/1196
-Patch2:         %{forgeurl}/pull/1196.patch
+Patch2:         %{url}/pull/1196.patch
 
 # Fix signature of dummy realloc() for STB_VORBIS_NO_CRT
 # https://github.com/nothings/stb/pull/1198
-Patch3:         %{forgeurl}/pull/1198.patch
+Patch3:         %{url}/pull/1198.patch
 
 # Remove stb_perlin from tests
 # https://github.com/nothings/stb/pull/1198
-Patch4:         %{forgeurl}/pull/1204.patch
+Patch4:         %{url}/pull/1204.patch
 
 # Candidate fix for:
 # https://nvd.nist.gov/vuln/detail/CVE-2021-42715
@@ -79,7 +78,7 @@ Patch4:         %{forgeurl}/pull/1204.patch
 # Fixes a crash and an infinite loop in stb_image that could occur with
 # specially constructed PGM and HDR files
 # https://github.com/nothings/stb/pull/1223
-Patch5:         %{forgeurl}/pull/1223.patch
+Patch5:         %{url}/pull/1223.patch
 
 # Forward declare stbhw__process struct to fix warnings
 # https://github.com/nothings/stb/pull/1225
@@ -88,7 +87,7 @@ Patch5:         %{forgeurl}/pull/1223.patch
 # by manually compiling tests/herringbone_map.c; a real user of the
 # stb_herringbone_wang_tile library would encounter them; and inspection of the
 # patch shows it to be correct.
-Patch6:         %{forgeurl}/pull/1236.patch
+Patch6:         %{url}/pull/1236.patch
 
 # Candidate fix for:
 # https://nvd.nist.gov/vuln/detail/CVE-2022-28041
@@ -557,7 +556,7 @@ Documentation for stb.
 
 
 %prep
-%forgeautosetup -p1
+%autosetup -n stb-%{commit} -p1
 
 # Append to OS build flags rather than overriding them
 #
@@ -845,30 +844,4 @@ EOF
 
 
 %changelog
-* Wed Apr 20 2022 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.8
-- Security fix for CVE-2022-28041
-
-* Fri Oct 22 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.7
-- Security fix for CVE-2021-42715 and CVE-2021-42716
-
-* Fri Oct 22 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.6
-- Update to af1a5bc: only issue templates are affected; packaged files should
-  be identical.
-
-* Thu Sep 09 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.5
-- Update to c0c9826 (fix RHBZ#2002436)
-- Removed and obsoleted stb_perlin-devel due to possible patents
-- Updated stb_truetype to 1.26
-- Bug fixes in stb_image (no new version number)
-
-* Tue Aug 24 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.4
-- Fix signature of dummy realloc() for STB_VORBIS_NO_CRT
-
-* Mon Aug 23 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.3
-- Use symlinks so including "stb_foo.h" and "stb/stb_foo.h" both work
-
-* Mon Aug 23 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.2
-- Fix duplicated snapshot information
-
-* Mon Aug 23 2021 Benjamin A. Beasley <code@musicinmybrain.net> - 0-0.1.20210728git3a11740
-- Initial package for EPEL8
+%autochangelog
