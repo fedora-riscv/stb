@@ -230,7 +230,13 @@ Version:        %{stb_divide_version}
 Provides:       stb_divide-static = %{stb_divide_version}-%{release}
 
 %description -n stb_divide-devel
-Three kinds of divide/modulus of signed integers.
+This file provides three different consistent divide/mod pairs
+implemented on top of arbitrary C/C++ division, including correct
+handling of overflow of intermediate calculations:
+
+    trunc:   a/b truncates to 0,           a%b has same sign as a
+    floor:   a/b truncates to -inf,        a%b has same sign as b
+    eucl:    a/b truncates to sign(b)*inf, a%b is non-negative
 
 
 %package -n stb_ds-devel
@@ -243,8 +249,7 @@ Provides:       stb_ds-static = %{stb_ds_version}-%{release}
 This is a single-header-file library that provides easy-to-use dynamic arrays
 and hash tables for C (also works in C++).
 
-For a gentle introduction:
-   http://nothings.org/stb_ds
+For a gentle introduction: https://nothings.org/stb_ds
 
 
 %package -n stb_dxt-devel
@@ -325,7 +330,10 @@ Version:        %{stb_image_version}
 Provides:       stb_image-static = %{stb_image_version}-%{release}
 
 %description -n stb_image-devel
-Image loader.
+%{summary}.
+
+Primarily of interest to game developers and other people who can avoid
+problematic images and only need the trivial interface.
 
 
 %package -n stb_image_resize-devel
@@ -387,7 +395,7 @@ Version:        %{stb_leakcheck_version}
 Provides:       stb_leakcheck-static = %{stb_leakcheck_version}-%{release}
 
 %description -n stb_leakcheck-devel
-Quick and dirty malloc leak-checking.
+%{summary}.
 
 
 %package -n stb_perlin-devel
@@ -397,7 +405,7 @@ Version:        %{stb_perlin_version}%{snapinfo}
 Provides:       stb_perlin-static = %{stb_perlin_version}%{snapinfo}-%{release}
 
 %description -n stb_perlin-devel
-Perlin noise
+%{summary}.
 
 
 %package -n stb_rect_pack-devel
