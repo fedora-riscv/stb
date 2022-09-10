@@ -173,9 +173,10 @@ Requires:       stb_image_write-static = %{stb_image_write_version}-%{release}
 Requires:       stb_include-devel%{?_isa} = %{stb_include_version}-%{release}
 Requires:       stb_include-static = %{stb_include_version}-%{release}
 %endif
-<<<<<<< HEAD
 Requires:       stb_leakcheck-devel%{?_isa} = %{stb_leakcheck_version}-%{release}
 Requires:       stb_leakcheck-static = %{stb_leakcheck_version}-%{release}
+Requires:       stb_perlin-devel%{?_isa} = %{stb_perlin_version}-%{release}
+Requires:       stb_perlin-static = %{stb_perlin_version}-%{release}
 Requires:       stb_rect_pack-devel%{?_isa} = %{stb_rect_pack_version}-%{release}
 Requires:       stb_rect_pack-static = %{stb_rect_pack_version}-%{release}
 Requires:       stb_sprintf-devel%{?_isa} = %{stb_sprintf_version}-%{release}
@@ -190,26 +191,6 @@ Requires:       stb_vorbis-devel%{?_isa} = %{stb_vorbis_version}-%{release}
 Requires:       stb_vorbis-static = %{stb_vorbis_version}-%{release}
 Requires:       stb_voxel_render-devel%{?_isa} = %{stb_voxel_render_version}-%{release}
 Requires:       stb_voxel_render-static = %{stb_voxel_render_version}-%{release}
-=======
-Requires:       stb_leakcheck-devel%{?_isa} = %{stb_leakcheck_version}%{snapinfo}-%{release}
-Requires:       stb_leakcheck-static = %{stb_leakcheck_version}%{snapinfo}-%{release}
-Requires:       stb_perlin-devel%{?_isa} = %{stb_perlin_version}%{snapinfo}-%{release}
-Requires:       stb_perlin-static = %{stb_perlin_version}%{snapinfo}-%{release}
-Requires:       stb_rect_pack-devel%{?_isa} = %{stb_rect_pack_version}%{snapinfo}-%{release}
-Requires:       stb_rect_pack-static = %{stb_rect_pack_version}%{snapinfo}-%{release}
-Requires:       stb_sprintf-devel%{?_isa} = %{stb_sprintf_version}%{snapinfo}-%{release}
-Requires:       stb_sprintf-static = %{stb_sprintf_version}%{snapinfo}-%{release}
-Requires:       stb_textedit-devel%{?_isa} = %{stb_textedit_version}%{snapinfo}-%{release}
-Requires:       stb_textedit-static = %{stb_textedit_version}%{snapinfo}-%{release}
-Requires:       stb_tilemap_editor-devel%{?_isa} = %{stb_tilemap_editor_version}%{snapinfo}-%{release}
-Requires:       stb_tilemap_editor-static = %{stb_tilemap_editor_version}%{snapinfo}-%{release}
-Requires:       stb_truetype-devel%{?_isa} = %{stb_truetype_version}%{snapinfo}-%{release}
-Requires:       stb_truetype-static = %{stb_truetype_version}%{snapinfo}-%{release}
-Requires:       stb_vorbis-devel%{?_isa} = %{stb_vorbis_version}%{snapinfo}-%{release}
-Requires:       stb_vorbis-static = %{stb_vorbis_version}%{snapinfo}-%{release}
-Requires:       stb_voxel_render-devel%{?_isa} = %{stb_voxel_render_version}%{snapinfo}-%{release}
-Requires:       stb_voxel_render-static = %{stb_voxel_render_version}%{snapinfo}-%{release}
->>>>>>> 466d39d (Update to 8b5f1f3)
 
 %description devel
 The stb-devel package contains libraries and header files for developing
@@ -219,7 +200,7 @@ This is a metapackage that requires the -devel packages for all stb libraries.
 
 
 %package -n stb_c_lexer-devel
-Summary:        Lexer for making little C-like languages with recursive-descent parsers
+Summary:        Simplify writing parsers for C-like languages
 Version:        %{stb_c_lexer_version}
 
 Provides:       stb_c_lexer-static = %{stb_c_lexer_version}-%{release}
@@ -229,7 +210,7 @@ Lexer for making little C-like languages with recursive-descent parsers.
 
 
 %package -n stb_connected_components-devel
-Summary:        Connected components on grids
+Summary:        Incrementally compute reachability on grids
 Version:        %{stb_connected_components_version}
 
 Provides:       stb_connected_components-static = %{stb_connected_components_version}-%{release}
@@ -243,7 +224,7 @@ their orthogonal neighbors, not diagonally.
 
 
 %package -n stb_divide-devel
-Summary:        Three kinds of divide/modulus of signed integers
+Summary:        More useful 32-bit modulus e.g. “Euclidean divide”
 Version:        %{stb_divide_version}
 
 Provides:       stb_divide-static = %{stb_divide_version}-%{release}
@@ -253,7 +234,7 @@ Three kinds of divide/modulus of signed integers.
 
 
 %package -n stb_ds-devel
-Summary:        Data structures
+Summary:        Typesafe dynamic array and hash tables for C, will compile in C++
 Version:        %{stb_ds_version}
 
 Provides:       stb_ds-static = %{stb_ds_version}-%{release}
@@ -267,7 +248,7 @@ For a gentle introduction:
 
 
 %package -n stb_dxt-devel
-Summary:        DXT1/DXT5 compressor
+Summary:        Fabian “ryg” Giesen’s real-time DXT compressor
 Version:        %{stb_dxt_version}
 
 Provides:       stb_dxt-static = %{stb_dxt_version}-%{release}
@@ -276,9 +257,8 @@ Provides:       stb_dxt-static = %{stb_dxt_version}-%{release}
 DXT1/DXT5 compressor.
 
 
-
 %package -n stb_easy_font-devel
-Summary:        Bitmap font for 3D rendering
+Summary:        Quick-and-dirty easy-to-deploy bitmap font for printing frame rate, etc
 Version:        %{stb_easy_font_version}
 
 Provides:       stb_easy_font-static = %{stb_easy_font_version}-%{release}
@@ -298,7 +278,7 @@ Doesn’t use any textures, instead builds characters out of quads.
 
 
 %package -n stb_herringbone_wang_tile-devel
-Summary:        Herringbone Wang Tile Generator
+Summary:        Herringbone Wang tile map generator
 Version:        %{stb_herringbone_wang_tile_version}
 
 Provides:       stb_herringbone_wang_tile-static = %{stb_herringbone_wang_tile_version}-%{release}
@@ -323,7 +303,7 @@ loading the tile set and specifying the constraints explicitly yourself.
 
 
 %package -n stb_hexwave-devel
-Summary:        A flexible anti-aliased (bandlimited) digital audio oscillator
+Summary:        Audio waveform synthesizer
 Version:        %{stb_hexwave_version}
 
 Provides:       stb_hexwave-static = %{stb_hexwave_version}-%{release}
@@ -339,7 +319,7 @@ multiple voices, etc.
 
 
 %package -n stb_image-devel
-Summary:        Image loader
+Summary:        Image loading/decoding from file/memory: JPG, PNG, TGA, BMP, PSD, GIF, HDR, PIC
 Version:        %{stb_image_version}
 
 Provides:       stb_image-static = %{stb_image_version}-%{release}
@@ -349,7 +329,7 @@ Image loader.
 
 
 %package -n stb_image_resize-devel
-Summary:        Image resizing
+Summary:        Resize images larger/smaller with good quality
 Version:        %{stb_image_resize_version}
 
 Provides:       stb_image_resize-static = %{stb_image_resize_version}-%{release}
@@ -364,7 +344,7 @@ w/Mitchell filter, upsamples w/cubic interpolation.
 
 
 %package -n stb_image_write-devel
-Summary:        Writes out PNG/BMP/TGA/JPEG/HDR images to C stdio
+Summary:        Image writing to disk: PNG, TGA, BMP
 Version:        %{stb_image_write_version}
 
 Provides:       stb_image_write-static = %{stb_image_write_version}-%{release}
@@ -381,7 +361,7 @@ run-time performance.
 
 %if %{with stb_include}
 %package -n stb_include-devel
-Summary:        Parse and process #include directives
+Summary:        Implement recursive #include support, particularly for GLSL
 Version:        %{stb_include_version}
 
 Provides:       stb_include-static = %{stb_include_version}-%{release}
@@ -401,7 +381,7 @@ API.
 
 
 %package -n stb_leakcheck-devel
-Summary:        Quick and dirty malloc leak-checking
+Summary:        Quick-and-dirty malloc/free leak-checking
 Version:        %{stb_leakcheck_version}
 
 Provides:       stb_leakcheck-static = %{stb_leakcheck_version}-%{release}
@@ -411,7 +391,7 @@ Quick and dirty malloc leak-checking.
 
 
 %package -n stb_perlin-devel
-Summary:        Perlin noise
+Summary:        Perlin’s revised simplex noise w/ different seeds
 Version:        %{stb_perlin_version}%{snapinfo}
 
 Provides:       stb_perlin-static = %{stb_perlin_version}%{snapinfo}-%{release}
@@ -421,7 +401,7 @@ Perlin noise
 
 
 %package -n stb_rect_pack-devel
-Summary:        Rectangle packing
+Summary:        Simple 2D rectangle packer with decent quality
 Version:        %{stb_rect_pack_version}
 
 Provides:       stb_rect_pack-static = %{stb_rect_pack_version}-%{release}
@@ -443,7 +423,7 @@ same API, but with a different init function.
 
 
 %package -n stb_sprintf-devel
-Summary:        Implementation of snprintf()
+Summary:        Fast sprintf, snprintf for C/C++
 Version:        %{stb_sprintf_version}
 
 Provides:       stb_sprintf-static = %{stb_sprintf_version}-%{release}
@@ -474,7 +454,7 @@ when using MSVC static libs, calling sprintf drags in 16K.
 
 
 %package -n stb_textedit-devel
-Summary:        Guts of a multi-line text-editing widget
+Summary:        Guts of a text editor for games etc., implementing them from scratch
 Version:        %{stb_textedit_version}
 
 Provides:       stb_textedit-static = %{stb_textedit_version}-%{release}
@@ -494,7 +474,7 @@ Non-trivial behaviors are modelled after Windows text controls.
 
 
 %package -n stb_tilemap_editor-devel
-Summary:        Embeddable tilemap editor for C/C++
+Summary:        Embeddable tilemap editor
 Version:        %{stb_tilemap_editor_version}
 
 Provides:       stb_tilemap_editor-static = %{stb_tilemap_editor_version}-%{release}
@@ -504,7 +484,7 @@ Embeddable tilemap editor for C/C++.
 
 
 %package -n stb_truetype-devel
-Summary:        Processes TrueType Files
+Summary:        Parse, decode, and rasterize characters from TrueType fonts
 Version:        %{stb_truetype_version}
 
 Provides:       stb_truetype-static = %{stb_truetype_version}-%{release}
@@ -529,7 +509,7 @@ This library processes TrueType files:
 
 
 %package -n stb_vorbis-devel
-Summary:        Ogg Vorbis audio decoder
+Summary:        Decode Ogg Vorbis files from file/memory to float/16-bit signed output
 Version:        %{stb_vorbis_version}
 
 Provides:       stb_vorbis-static = %{stb_vorbis_version}-%{release}
