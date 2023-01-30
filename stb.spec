@@ -1,4 +1,4 @@
-%global commit 6199bf77130da41fd424722eeb7a8db4d766c4c6
+%global commit 5736b15f7ea0ffb08dd38af21067c314d6a3aae9
 %global snapdate 20230129
 
 # We choose not to package the “stb_include” library (stb_include.h) because,
