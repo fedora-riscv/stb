@@ -582,7 +582,7 @@ CXXFLAGS="${CXXFLAGS} -std=c++0x"
 # library without having to make their own local symlinks or patch their
 # sources.
 install -d '%{buildroot}%{_includedir}/stb'
-install -t '%{buildroot}%{_includedir}/stb' -p -m 0644 -D stb_*.h stb_*.c
+install -t '%{buildroot}%{_includedir}/stb' -p -m 0644 stb_*.h stb_*.c
 %if %{without stb_include}
 rm -vf '%{buildroot}%{_includedir}/stb/stb_include.h'
 %endif
