@@ -528,7 +528,7 @@ Documentation for stb.
 
 
 %prep
-%autosetup -p1 -n %{name}-%{commit}
+%autosetup -n stb-%{commit} -p1
 
 # Append to OS build flags rather than overriding them
 #
