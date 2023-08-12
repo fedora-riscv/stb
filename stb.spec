@@ -24,7 +24,7 @@ Name:           stb
 #   https://github.com/nothings/stb/issues/1101
 %global snapinfo ^%{snapdate}git%(echo '%{commit}' | cut -b -7)
 Version:        0%{snapinfo}
-Release:        %autorelease -p -e rv64
+Release:        %autorelease -p -b 2 -e rv64
 Summary:        Single-file public domain libraries for C/C++
 
 # See LICENSE.
