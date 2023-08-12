@@ -24,7 +24,7 @@ Name:           stb
 #   https://github.com/nothings/stb/issues/1101
 %global snapinfo ^%{snapdate}git%(echo '%{commit}' | cut -b -7)
 Version:        0%{snapinfo}
-Release:        %autorelease -p
+Release:        %autorelease -p -e rv64
 Summary:        Single-file public domain libraries for C/C++
 
 # See LICENSE.
@@ -66,6 +66,9 @@ Patch:          %{url}/pull/1236.patch
 # Fixes null pointer dereference in https://github.com/nothings/stb/issues/1452
 # https://github.com/nothings/stb/pull/1454
 Patch:          %{url}/pull/1454.patch
+
+# riscv64 compile fix
+Patch1000: fix-riscv64-compile-uintptr.patch
 
 %global stb_c_lexer_version 0.12
 %global stb_connected_components_version 0.96
